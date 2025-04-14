@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const SelectionContainer = styled.div`
     text-align: center;
@@ -15,7 +16,7 @@ const ListItem = styled.li`
 `;
 
 const MonitoriaButton = styled.button`
-    background-color: #4CAF50;
+    background-color: #76042F;
     color: white;
     border: none;
     cursor: pointer;
@@ -23,12 +24,17 @@ const MonitoriaButton = styled.button`
     width: 100%;
 
     &:hover {
-        background-color: #45a049;
+        background-color:rgb(0, 0, 0);
     }
 `;
 
 const MonitoriaSelection = () => {
+    const navigate = useNavigate();
     const monitorias = ['Matemática', 'Física', 'História', 'Geografia', 'Química', 'Biologia'];
+
+    const handleSelectAndNavigate = (monitoria) => {
+        navigate('/matricula', { state: { selectedMonitoria: monitoria } });
+    };
 
     return (
         <SelectionContainer>
@@ -36,7 +42,7 @@ const MonitoriaSelection = () => {
             <List>
                 {monitorias.map((monitoria, index) => (
                     <ListItem key={index}>
-                        <MonitoriaButton onClick={() => alert(`Você selecionou ${monitoria}`)}>
+                        <MonitoriaButton onClick={() => handleSelectAndNavigate(monitoria)}>
                             {monitoria}
                         </MonitoriaButton>
                     </ListItem>
